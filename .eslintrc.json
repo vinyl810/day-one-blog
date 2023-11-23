@@ -1,3 +1,16 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "@stylistic/js"],
+  "rules": {
+    "react/jsx-filename-extension": 0,
+    "@stylistic/js/max-len": [2, 88]
+  },
+  "root": true
 }
