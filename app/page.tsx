@@ -1,21 +1,25 @@
+import React from 'react';
+import Link from 'next/link';
 import fs from 'fs';
 import matter from 'gray-matter';
-import Link from 'next/link';
-import React from 'react';
+import style from './style.module.css';
 
 export default async function Home() {
-  const files = fs.readdirSync('./contents/posts');
+  const files = fs.readdirSync(`${process.env.MD_PATH}`);
   const parsedFiles = files.map((fileName) => {
-    const { data: metaData } = matter(fs.readFileSync(`./contents/posts/${fileName}`));
-    return { slug: fileName.replaceAll('.md', ''), metaData };
+    const file = fs.readFileSync(`${process.env.MD_PATH}/${fileName}`);
+    const { data: metaData } = matter(file);
+    return { slug: fileName.replaceAll(`.${process.env.MD_EXT}`, ''), metaData };
   });
 
   return (
-    <main>
+    <main className={style.main}>
       <div>
         {parsedFiles.map((file) => (
           <div key={file.slug}>
-            <Link href={file.slug}>{file.metaData.title}</Link>
+            <Link href={`${process.env.POST_PATH}/${file.slug}`}>
+              {file.metaData.title}
+            </Link>
           </div>
         ))}
       </div>

@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+
+  --main-padding: 15px;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}

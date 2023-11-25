@@ -1,0 +1,4 @@
+.main {
+  height: calc(100% - calc(2 * var(--main-padding)));
+  padding: var(--main-padding);
+}

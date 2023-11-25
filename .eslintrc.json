@@ -10,6 +10,7 @@
   "plugins": ["@typescript-eslint", "@stylistic/js"],
   "rules": {
     "react/jsx-filename-extension": 0,
+    "import/extensions": 0,
     "@stylistic/js/max-len": [2, 88]
   },
   "root": true
