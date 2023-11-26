@@ -6,8 +6,8 @@ import React from 'react';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'dayone\'s blog',
-  description: 'day one at work',
+  title: 'day one at work',
+  description: 'Mr. dayone kim\'s first day at work',
 };
 
 export default function RootLayout({

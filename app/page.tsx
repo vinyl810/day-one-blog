@@ -1,8 +1,16 @@
 import React from 'react';
 import Link from 'next/link';
+import { Libre_Barcode_128_Text as LibreBarcode } from 'next/font/google';
 import fs from 'fs';
 import matter from 'gray-matter';
+import Image from 'next/image';
 import style from './style.module.css';
+
+const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
+const voidMatter = {
+  title: '무제',
+  date: '2000.04.27',
+};
 
 export default async function Home() {
   const files = fs.readdirSync(`${process.env.MD_PATH}`);
@@ -13,16 +21,48 @@ export default async function Home() {
   });
 
   return (
-    <main className={style.main}>
-      <div>
-        {parsedFiles.map((file) => (
-          <div key={file.slug}>
-            <Link href={`${process.env.POST_PATH}/${file.slug}`}>
-              {file.metaData.title}
-            </Link>
+    <>
+      <header className={`${style.header}`}>
+        <span className={`${libreBarcode.className} ${style['header-logo']}`}>
+          DAY ONE AT WORK
+        </span>
+        <Image src="/github-mark.png" alt="github-logo" height="25" width="25" />
+      </header>
+      <main className={style.main}>
+        <div className={style.intro}>
+          <span className={`${libreBarcode.className} ${style['intro-logo']}`}>
+            DAY ONE AT WORK
+          </span>
+          <div className={style.about}>
+            about me
           </div>
-        ))}
-      </div>
-    </main>
+        </div>
+        <div style={{ height: '100%', width: '100%' }}>
+          <div className={style['posts-header']}>recent posts</div>
+          <div className={style.posts}>
+            {parsedFiles.map((file) => (
+              <Link
+                className={style['post-item']}
+                key={file.slug}
+                href={`${process.env.POST_PATH}/${file.slug}`}
+              >
+                <div className={style['post-cover-container']}>
+                  {file.metaData.coverImage
+                  && (
+                    <Image
+                      src={file.metaData.coverImage}
+                      alt="cover"
+                      className={style['post-cover']}
+                      fill
+                    />
+                  )}
+                </div>
+                {file.metaData.title ?? voidMatter.title}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </main>
+    </>
   );
 }

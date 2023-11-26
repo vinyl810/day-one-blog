@@ -1,1 +1,11 @@
-{ "extends": ["stylelint-config-standard"], "rules": {"declaration-block-trailing-semicolon": "always"} }
+{ 
+  "extends": ["stylelint-config-idiomatic-order", "stylelint-config-standard"],
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "declaration-block-trailing-semicolon": "always",
+    "order/order": [
+			"custom-properties",
+			"declarations"
+		]
+  } 
+}
