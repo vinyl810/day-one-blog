@@ -7,11 +7,9 @@
   margin: 0;
 }
 
-html {
-  height: 100%;
+html, body {
+  max-width: 100%;
+  min-height: 100vh;
+  background: ghostwhite;
   font-size: 1rem;
-}
-
-body {
-  height: 100%;
 }

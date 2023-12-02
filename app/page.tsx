@@ -1,9 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Libre_Barcode_128_Text as LibreBarcode } from 'next/font/google';
 import fs from 'fs';
 import matter from 'gray-matter';
-import Image from 'next/image';
+import FloatingHeader from '@/components/FloatingHeader';
 import style from './style.module.css';
 
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
@@ -22,6 +23,7 @@ export default async function Home() {
 
   return (
     <>
+      <FloatingHeader />
       <header className={`${style.header}`}>
         <span className={`${libreBarcode.className} ${style['header-logo']}`}>
           DAY ONE AT WORK
@@ -37,17 +39,16 @@ export default async function Home() {
             about me
           </div>
         </div>
-        <div style={{ height: '100%', width: '100%' }}>
-          <div className={style['posts-header']}>recent posts</div>
-          <div className={style.posts}>
-            {parsedFiles.map((file) => (
-              <Link
-                className={style['post-item']}
-                key={file.slug}
-                href={`${process.env.POST_PATH}/${file.slug}`}
-              >
-                <div className={style['post-cover-container']}>
-                  {file.metaData.coverImage
+        <div className={style['posts-header']}>recent posts</div>
+        <div className={style.posts}>
+          {parsedFiles.map((file) => (
+            <Link
+              className={style['post-item']}
+              key={file.slug}
+              href={`${process.env.POST_PATH}/${file.slug}`}
+            >
+              <div className={style['post-cover-container']}>
+                {file.metaData.coverImage
                   && (
                     <Image
                       src={file.metaData.coverImage}
@@ -56,11 +57,10 @@ export default async function Home() {
                       fill
                     />
                   )}
-                </div>
-                {file.metaData.title ?? voidMatter.title}
-              </Link>
-            ))}
-          </div>
+              </div>
+              {file.metaData.title ?? voidMatter.title}
+            </Link>
+          ))}
         </div>
       </main>
     </>
