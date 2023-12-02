@@ -1,18 +1,7 @@
 .main {
   display: grid;
-  grid-template-rows: 0.5fr 1fr;
+  grid-template-rows: 15rem 1fr;
   place-items: center center;
-}
-
-.header-logo {
-  cursor: pointer;
-  font-size: 2rem;
-  user-select: none;
-}
-
-.intro-logo {
-  font-size: calc(1vw + 3rem);
-  user-select: none;
 }
 
 .header {
@@ -28,6 +17,12 @@
   color: #010101;
 }
 
+.header-logo {
+  cursor: pointer;
+  font-size: 2rem;
+  user-select: none;
+}
+
 .intro {
   display: flex;
   flex-direction: column;
@@ -36,7 +31,22 @@
   gap: var(--padding-md);
 }
 
+.intro-logo {
+  font-size: calc(1vw + 3rem);
+  user-select: none;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .about {
+  box-sizing: border-box;
+  padding: 0.25rem;
+  border-radius: 2px;
   border-bottom: 2px solid lightgray;
 }
 
@@ -49,7 +59,7 @@
   width: 100%;
   box-sizing: border-box;
   flex-wrap: wrap;
-  padding-top: var(--padding-md);
+  padding-top: 1rem;
   border-top: 2px solid lightgray;
   margin: -1rem;
 }

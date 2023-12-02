@@ -1,26 +1,26 @@
 // eslint-disable-next-line no-unused-vars
-type HandlerFunction = (height: number) => void
+type HeightSetterFunction = (height: number) => void
 
 export default function windowScrollControl(threshold = 70) {
   let previousScrollY = 0;
   const headerThreshold = threshold;
 
-  const onScrollY = (height: number, heightHandlerFunction: HandlerFunction) => {
+  const onScrollY = (height: number, heightSetterFunction: HeightSetterFunction) => {
     const deltaY = window.scrollY - previousScrollY;
     if (window.scrollY <= headerThreshold) {
-      heightHandlerFunction(-headerThreshold);
+      heightSetterFunction(-headerThreshold);
       return;
     }
     if (deltaY < 0) {
       if (height < 0) {
-        heightHandlerFunction(height - deltaY);
+        heightSetterFunction(height - deltaY);
       } else {
-        heightHandlerFunction(0);
+        heightSetterFunction(0);
       }
     } else if (height > -headerThreshold) {
-      heightHandlerFunction(height - deltaY);
+      heightSetterFunction(height - deltaY);
     } else {
-      heightHandlerFunction(-headerThreshold);
+      heightSetterFunction(-headerThreshold);
     }
     previousScrollY = window.scrollY;
   };

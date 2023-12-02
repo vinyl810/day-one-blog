@@ -7,12 +7,10 @@ import style from './style.module.css';
 import windowScrollControl from './windowScrollControl';
 
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
-// eslint-disable-next-line react-hooks/rules-of-hooks
 const { onScrollY } = windowScrollControl();
 
 export default function FloatingHeader() {
   const [height, setHeight] = useState(-70);
-
   const onScroll = () => onScrollY(height, setHeight);
 
   useEffect(() => {

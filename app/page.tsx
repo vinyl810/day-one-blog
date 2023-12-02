@@ -2,24 +2,15 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Libre_Barcode_128_Text as LibreBarcode } from 'next/font/google';
-import fs from 'fs';
-import matter from 'gray-matter';
 import FloatingHeader from '@/components/FloatingHeader';
+import readMarkdown from '@/lib/readMarkdown';
 import style from './style.module.css';
 
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
-const voidMatter = {
-  title: '무제',
-  date: '2000.04.27',
-};
+const { readFrontMatter } = readMarkdown();
 
 export default async function Home() {
-  const files = fs.readdirSync(`${process.env.MD_PATH}`);
-  const parsedFiles = files.map((fileName) => {
-    const file = fs.readFileSync(`${process.env.MD_PATH}/${fileName}`);
-    const { data: metaData } = matter(file);
-    return { slug: fileName.replaceAll(`.${process.env.MD_EXT}`, ''), metaData };
-  });
+  const frontMatter = readFrontMatter();
 
   return (
     <>
@@ -35,30 +26,32 @@ export default async function Home() {
           <span className={`${libreBarcode.className} ${style['intro-logo']}`}>
             DAY ONE AT WORK
           </span>
-          <div className={style.about}>
-            about me
+          <div className={style.menu}>
+            <div className={style.about}>all posts</div>
+            <div className={style.about}>about me</div>
+            <div className={style.about}>categories</div>
           </div>
         </div>
-        <div className={style['posts-header']}>recent posts</div>
+        {/* <div className={style['posts-header']}>recent posts</div> */}
         <div className={style.posts}>
-          {parsedFiles.map((file) => (
+          {frontMatter.map((file) => (
             <Link
               className={style['post-item']}
               key={file.slug}
               href={`${process.env.POST_PATH}/${file.slug}`}
             >
               <div className={style['post-cover-container']}>
-                {file.metaData.coverImage
+                {file.frontMatter.coverImage
                   && (
                     <Image
-                      src={file.metaData.coverImage}
+                      src={file.frontMatter.coverImage}
                       alt="cover"
                       className={style['post-cover']}
                       fill
                     />
                   )}
               </div>
-              {file.metaData.title ?? voidMatter.title}
+              {file.frontMatter.title}
             </Link>
           ))}
         </div>
