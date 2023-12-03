@@ -1,5 +1,6 @@
 import fs from 'fs';
 import matter from 'gray-matter';
+import path from 'path';
 
 interface FrontMatter {
   title: string
@@ -8,6 +9,8 @@ interface FrontMatter {
   date: string
   category: string
 }
+
+const contentsPath = path.join(process.cwd(), 'contents', 'posts');
 
 const fillEmptyMatter = (frontMatter: FrontMatter) => {
   const {
@@ -29,9 +32,9 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
 
 export default function readMarkdown() {
   const readFrontMatter = () => {
-    const files = fs.readdirSync(`${process.env.MD_PATH}`);
+    const files = fs.readdirSync(contentsPath);
     const parsedFiles = files.map((fileName) => {
-      const file = fs.readFileSync(`${process.env.MD_PATH}/${fileName}`);
+      const file = fs.readFileSync(`${contentsPath}/${fileName}`);
       const { data } = matter(file);
       /* unsafe assertion for metaData */
       const frontMatter = fillEmptyMatter(<FrontMatter>data);
@@ -48,9 +51,9 @@ export default function readMarkdown() {
 
   const readContent = (slug: string) => {
     const parsedSlug = slug.replaceAll('-', ' ');
-    if (fs.existsSync(`${process.env.MD_PATH}/${parsedSlug}.${process.env.MD_EXT}`)) {
+    if (fs.existsSync(`${contentsPath}/${parsedSlug}.${process.env.MD_EXT}`)) {
       const file = fs.readFileSync(
-        `${process.env.MD_PATH}/${parsedSlug}.${process.env.MD_EXT}`,
+        `${contentsPath}/${parsedSlug}.${process.env.MD_EXT}`,
       );
       return matter(file).content;
     }
