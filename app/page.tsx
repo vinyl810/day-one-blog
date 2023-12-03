@@ -6,9 +6,10 @@ import readMarkdown from '@/lib/readMarkdown';
 import style from './style.module.css';
 
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
+const { readFrontMatter } = readMarkdown();
 
 export default async function Home() {
-  const frontMatter = readMarkdown().readFrontMatter();
+  const frontMatter = readFrontMatter();
   console.log('frontMatter', frontMatter);
 
   return (
