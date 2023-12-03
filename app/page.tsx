@@ -10,7 +10,7 @@ const { readFrontMatter } = readMarkdown();
 
 export default async function Home() {
   const frontMatter = readFrontMatter();
-  console.log('frontMatter', frontMatter);
+  console.log('frontMatter', frontMatter, readFrontMatter);
 
   return (
     <main className={style.main}>
