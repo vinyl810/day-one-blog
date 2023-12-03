@@ -43,7 +43,7 @@ export default function readMarkdown() {
         frontMatter,
       };
     });
-    const sortedFiles = parsedFiles?.toSorted?.(
+    parsedFiles?.sort?.(
       (a, b) => {
         console.log(
           (new Date(b.frontMatter.date)).getTime()
@@ -54,7 +54,6 @@ export default function readMarkdown() {
       },
     );
 
-    console.log(sortedFiles);
     return parsedFiles;
     // return parsedFiles?.toSorted?.(
     //   (a, b) => new Date(b.frontMatter.date).getTime()
