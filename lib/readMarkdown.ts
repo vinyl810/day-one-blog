@@ -44,29 +44,18 @@ export default function readMarkdown() {
       };
     });
     parsedFiles?.sort?.(
-      (a, b) => {
-        console.log(
-          (new Date(b.frontMatter.date)).getTime()
-          - (new Date(a.frontMatter.date)).getTime(),
-        );
-        return (new Date(b.frontMatter.date)).getTime()
-        - (new Date(a.frontMatter.date)).getTime();
-      },
+      (a, b) => (new Date(b.frontMatter.date)).getTime()
+        - (new Date(a.frontMatter.date)).getTime(),
     );
 
     return parsedFiles;
-    // return parsedFiles?.toSorted?.(
-    //   (a, b) => new Date(b.frontMatter.date).getTime()
-    //     - new Date(a.frontMatter.date).getTime(),
-    // );
   };
 
   const readContent = (slug: string) => {
     const parsedSlug = slug.replaceAll('-', ' ');
-    if (fs.existsSync(`${contentsPath}/${parsedSlug}.${process.env.MD_EXT}`)) {
-      const file = fs.readFileSync(
-        `${contentsPath}/${parsedSlug}.${process.env.MD_EXT}`,
-      );
+    const parsedPath = path.join(contentsPath, `${parsedSlug}.${process.env.MD_EXT}`);
+    if (fs.existsSync(parsedPath)) {
+      const file = fs.readFileSync(parsedPath);
       return matter(file).content;
     }
     return null;

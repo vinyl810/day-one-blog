@@ -9,7 +9,6 @@ const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
 
 export default async function Home() {
   const frontMatter = readMarkdown().readFrontMatter();
-  console.log('frontMatter', frontMatter);
 
   return (
     <main className={style.main}>
