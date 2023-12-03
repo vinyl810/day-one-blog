@@ -2,63 +2,14 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Libre_Barcode_128_Text as LibreBarcode } from 'next/font/google';
-import fs from 'fs';
-import matter from 'gray-matter';
-import path from 'path';
+import readMarkdown from '@/lib/readMarkdown';
 import style from './style.module.css';
-
-interface FrontMatter {
-  title: string
-  excerpt: string
-  coverImage: string
-  date: string
-  category: string
-}
-
-const contentsPath = path.join(process.cwd(), 'contents', 'posts');
-
-const fillEmptyMatter = (frontMatter: FrontMatter) => {
-  const {
-    title = 'No Title',
-    excerpt = 'No Excerpt',
-    coverImage = 'https://picsum.photos/200/300',
-    date = new Date(Date.now()),
-    category = 'No Category',
-  } = frontMatter;
-
-  return {
-    title,
-    excerpt,
-    coverImage,
-    date,
-    category,
-  };
-};
 
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
 
 export default async function Home() {
-  const readFrontMatter = () => {
-    const files = fs.readdirSync(contentsPath);
-    const parsedFiles = files.map((fileName) => {
-      const file = fs.readFileSync(path.join(contentsPath, fileName));
-      const { data } = matter(file);
-      /* unsafe assertion for metaData */
-      const frontMatter = fillEmptyMatter(data as FrontMatter);
-      return {
-        slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
-        frontMatter,
-      };
-    });
-    console.log('parsedFiles', parsedFiles);
-    return parsedFiles;
-    // return parsedFiles?.toSorted?.(
-    //   (a, b) => new Date(b.frontMatter.date).getTime()
-    //     - new Date(a.frontMatter.date).getTime(),
-    // );
-  };
-  const frontMatter = readFrontMatter();
-  console.log('frontMatter', frontMatter, readFrontMatter);
+  const frontMatter = readMarkdown().readFrontMatter();
+  console.log('frontMatter', frontMatter);
 
   return (
     <main className={style.main}>
