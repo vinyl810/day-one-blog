@@ -2,11 +2,10 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Libre_Barcode_128_Text as LibreBarcode } from 'next/font/google';
-import readMarkdown from '@/lib/readMarkdown';
+import { readFrontMatter } from '@/lib/readMarkdown';
 import style from './style.module.css';
 
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
-const { readFrontMatter } = readMarkdown();
 
 export default async function Home() {
   const frontMatter = readFrontMatter();
