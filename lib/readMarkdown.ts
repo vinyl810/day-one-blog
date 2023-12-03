@@ -31,7 +31,6 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
 };
 
 export default function readMarkdown() {
-  console.log('readdirSync', process.env.MD_EXT, fs.readdirSync(contentsPath));
   const readFrontMatter = () => {
     const files = fs.readdirSync(contentsPath);
     const parsedFiles = files.map((fileName) => {
@@ -44,7 +43,18 @@ export default function readMarkdown() {
         frontMatter,
       };
     });
-    console.log('parsedFiles', parsedFiles);
+    const sortedFiles = parsedFiles?.toSorted?.(
+      (a, b) => {
+        console.log(
+          (new Date(b.frontMatter.date)).getTime()
+          - (new Date(a.frontMatter.date)).getTime(),
+        );
+        return (new Date(b.frontMatter.date)).getTime()
+        - (new Date(a.frontMatter.date)).getTime();
+      },
+    );
+
+    console.log(sortedFiles);
     return parsedFiles;
     // return parsedFiles?.toSorted?.(
     //   (a, b) => new Date(b.frontMatter.date).getTime()
