@@ -31,11 +31,11 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
 };
 
 export default function readMarkdown() {
-  console.log('readdirSync', fs.readdirSync(contentsPath));
+  console.log('readdirSync', process.env.MD_EXT, fs.readdirSync(contentsPath));
   const readFrontMatter = () => {
     const files = fs.readdirSync(contentsPath);
     const parsedFiles = files.map((fileName) => {
-      const file = fs.readFileSync(`${contentsPath}/${fileName}`);
+      const file = fs.readFileSync(path.join(contentsPath, fileName));
       const { data } = matter(file);
       /* unsafe assertion for metaData */
       const frontMatter = fillEmptyMatter(<FrontMatter>data);
@@ -44,6 +44,7 @@ export default function readMarkdown() {
         frontMatter,
       };
     });
+    console.log('parsedFiles', parsedFiles);
     return parsedFiles?.toSorted?.(
       (a, b) => new Date(b.frontMatter.date).getTime()
         - new Date(a.frontMatter.date).getTime(),
