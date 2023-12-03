@@ -24,7 +24,7 @@ export default async function Home() {
       </div>
       {/* <div className={style['posts-header']}>recent posts</div> */}
       <div className={style.posts}>
-        {frontMatter.map((file) => (
+        {frontMatter?.map?.((file) => (
           <Link
             className={style['post-item']}
             key={file.slug}
