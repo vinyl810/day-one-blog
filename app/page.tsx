@@ -51,10 +51,11 @@ export default async function Home() {
       };
     });
     console.log('parsedFiles', parsedFiles);
-    return parsedFiles?.toSorted?.(
-      (a, b) => new Date(b.frontMatter.date).getTime()
-        - new Date(a.frontMatter.date).getTime(),
-    );
+    return parsedFiles;
+    // return parsedFiles?.toSorted?.(
+    //   (a, b) => new Date(b.frontMatter.date).getTime()
+    //     - new Date(a.frontMatter.date).getTime(),
+    // );
   };
   const frontMatter = readFrontMatter();
   console.log('frontMatter', frontMatter, readFrontMatter);
