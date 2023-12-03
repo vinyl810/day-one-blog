@@ -17,7 +17,7 @@ export default function windowScrollControl(threshold = 70) {
       } else {
         heightSetterFunction(0);
       }
-    } else if (height > -headerThreshold) {
+    } else if (height > -headerThreshold && height <= 0) {
       heightSetterFunction(height - deltaY);
     } else {
       heightSetterFunction(-headerThreshold);

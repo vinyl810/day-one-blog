@@ -1,0 +1,360 @@
+/* PrismJS 1.29.0
+https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript */
+h1, h2, h3, p, pre, ul {
+  display: block;
+  margin-block: 1em 1em;
+  margin-inline: 0 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+p, ul {
+  font-size: 1.15rem;
+  line-height: 1.75rem;
+}
+
+pre {
+  font-size: 0.8rem;
+}
+
+@media (width < 767px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.15rem;
+  }
+  
+  p, ul {
+    font-size: 1rem;
+    line-height: 1.35rem;
+  }
+  
+  pre {
+    font-size: 0.7rem;
+  }
+}
+
+blockquote {
+  padding: 1rem 1rem 1rem 2rem;
+  border-left: 4px solid steelblue;
+  margin: 2rem 0;
+  background: #dce2ea;
+  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  color: var(--text1);
+
+  :first-child {
+    margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/**
+ * Coldark Theme for Prism.js
+ * Theme variation: Cold
+ * Tested with HTML, CSS, JS, JSON, PHP, YAML, Bash script
+ * @author Armand Philippot <contact@armandphilippot.com>
+ * @homepage https://github.com/ArmandPhilippot/coldark-prism
+ * @license MIT
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  background: none;
+  color: #111b27;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  hyphens: none;
+  line-height: 1.5;
+  tab-size: 4;
+  text-align: left;
+  white-space: pre;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
+
+pre[class*="language-"]::selection,
+pre[class*="language-"] ::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  background: #8da1b9;
+}
+
+pre[class*="language-"]::selection,
+code[class*="language-"]::selection,
+code[class*="language-"] ::selection {
+  background: #8da1b9;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  overflow: auto;
+  padding: 1em;
+  margin: 0.5em 0;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #e3eaf2;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em 0.3em;
+  border-radius: 0.3em;
+  white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #3c526d;
+}
+
+.token.punctuation {
+  color: #111b27;
+}
+
+.token.delimiter.important,
+.token.selector .parent,
+.token.tag,
+.token.tag .token.punctuation {
+  color: #006d6d;
+}
+
+.token.attr-name,
+.token.boolean,
+.token.boolean.important,
+.token.number,
+.token.constant,
+.token.selector .token.attribute {
+  color: #755f00;
+}
+
+.token.class-name,
+.token.key,
+.token.parameter,
+.token.property,
+.token.property-access,
+.token.variable {
+  color: #005a8e;
+}
+
+.token.attr-value,
+.token.inserted,
+.token.color,
+.token.selector .token.value,
+.token.string,
+.token.string .token.url-link {
+  color: #116b00;
+}
+
+.token.builtin,
+.token.keyword-array,
+.token.package,
+.token.regex {
+  color: #af00af;
+}
+
+.token.function,
+.token.selector .token.class,
+.token.selector .token.id {
+  color: #7c00aa;
+}
+
+.token.atrule .token.rule,
+.token.combinator,
+.token.keyword,
+.token.operator,
+.token.pseudo-class,
+.token.pseudo-element,
+.token.selector,
+.token.unit {
+  color: #a04900;
+}
+
+.token.deleted,
+.token.important {
+  color: #c22f2e;
+}
+
+.token.keyword-this,
+.token.this {
+  color: #005a8e;
+}
+
+.token.important,
+.token.keyword-this,
+.token.this,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.delimiter.important {
+  font-weight: inherit;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.language-markdown .token.title,
+.language-markdown .token.title .token.punctuation {
+  color: #005a8e;
+  font-weight: bold;
+}
+
+.language-markdown .token.blockquote.punctuation {
+  color: #af00af;
+}
+
+.language-markdown .token.code {
+  color: #006d6d;
+}
+
+.language-markdown .token.hr.punctuation {
+  color: #005a8e;
+}
+
+.language-markdown .token.url > .token.content {
+  color: #116b00;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.language-markdown .token.url-link {
+  color: #755f00;
+}
+
+.language-markdown .token.list.punctuation {
+  color: #af00af;
+}
+
+.language-markdown .token.table-header {
+  color: #111b27;
+}
+
+.language-json .token.operator {
+  color: #111b27;
+}
+
+.language-scss .token.variable {
+  color: #006d6d;
+}
+
+/* overrides color-values for the Show Invisibles plugin
+* https://prismjs.com/plugins/show-invisibles/
+*/
+.token.token.tab:not(:empty)::before,
+.token.token.cr::before,
+.token.token.lf::before,
+.token.token.space::before {
+  color: #3c526d;
+}
+
+/* overrides color-values for the Toolbar plugin
+* https://prismjs.com/plugins/toolbar/
+*/
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > a,
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > button {
+  background: #005a8e;
+  color: #e3eaf2;
+}
+
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > a:hover,
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > a:focus,
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > button:hover,
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > button:focus {
+  background: #005a8eda;
+  color: #e3eaf2;
+  text-decoration: none;
+}
+
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > span,
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > span:hover,
+div.code-toolbar > .toolbar.toolbar > .toolbar-item > span:focus {
+  background: #3c526d;
+  color: #e3eaf2;
+}
+
+/* overrides color-values for the Line Highlight plugin
+* http://prismjs.com/plugins/line-highlight/
+*/
+.line-highlight.line-highlight {
+  background: #8da1b92f;
+  background: linear-gradient(to right, #8da1b92f 70%, #8da1b925);
+}
+
+.line-highlight.line-highlight::before,
+.line-highlight.line-highlight[data-end]::after {
+  background-color: #3c526d;
+  box-shadow: 0 1px #8da1b9;
+  color: #e3eaf2;
+}
+
+pre[id].linkable-line-numbers.linkable-line-numbers span.line-numbers-rows > span:hover::before {
+  background-color: #3c526d1f;
+}
+
+
+/* overrides color-values for the Match Braces plugin
+* https://prismjs.com/plugins/match-braces/
+*/
+.rainbow-braces .token.token.punctuation.brace-level-1,
+.rainbow-braces .token.token.punctuation.brace-level-5,
+.rainbow-braces .token.token.punctuation.brace-level-9 {
+  color: #755f00;
+}
+
+.rainbow-braces .token.token.punctuation.brace-level-2,
+.rainbow-braces .token.token.punctuation.brace-level-6,
+.rainbow-braces .token.token.punctuation.brace-level-10 {
+  color: #af00af;
+}
+
+.rainbow-braces .token.token.punctuation.brace-level-3,
+.rainbow-braces .token.token.punctuation.brace-level-7,
+.rainbow-braces .token.token.punctuation.brace-level-11 {
+  color: #005a8e;
+}
+
+.rainbow-braces .token.token.punctuation.brace-level-4,
+.rainbow-braces .token.token.punctuation.brace-level-8,
+.rainbow-braces .token.token.punctuation.brace-level-12 {
+  color: #7c00aa;
+}
+
+/* overrides color-values for the Diff Highlight plugin
+* https://prismjs.com/plugins/diff-highlight/
+*/
+pre.diff-highlight > code .token.token.deleted:not(.prefix),
+pre > code.diff-highlight .token.token.deleted:not(.prefix) {
+  background-color: #c22f2e1f;
+}
+
+pre.diff-highlight > code .token.token.inserted:not(.prefix),
+pre > code.diff-highlight .token.token.inserted:not(.prefix) {
+  background-color: #116b001f;
+}

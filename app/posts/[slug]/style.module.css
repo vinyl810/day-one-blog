@@ -1,0 +1,10 @@
+.markdown-wrapper {
+  padding: 0 1rem;
+}
+
+@media (width >= 768px) {
+  .markdown-wrapper {
+    width: 768px;
+    margin: auto;
+  }
+}

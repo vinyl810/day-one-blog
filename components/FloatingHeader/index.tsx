@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Libre_Barcode_128_Text as LibreBarcode } from 'next/font/google';
+import Link from 'next/link';
 import style from './style.module.css';
 import windowScrollControl from './windowScrollControl';
 
@@ -22,9 +23,12 @@ export default function FloatingHeader() {
 
   return (
     <div className={`${style.header}`} style={{ marginTop: height }}>
-      <span className={`${libreBarcode.className} ${style['header-logo']}`}>
+      <Link
+        href="/"
+        className={`${libreBarcode.className} ${style['header-logo']}`}
+      >
         DAY ONE AT WORK
-      </span>
+      </Link>
       <Image src="/github-mark.png" alt="github-logo" height="25" width="25" />
     </div>
   );

@@ -35,7 +35,10 @@ export default function readMarkdown() {
       const { data } = matter(file);
       /* unsafe assertion for metaData */
       const frontMatter = fillEmptyMatter(<FrontMatter>data);
-      return { slug: fileName.replaceAll(`.${process.env.MD_EXT}`, ''), frontMatter };
+      return {
+        slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
+        frontMatter,
+      };
     });
     return parsedFiles.toSorted(
       (a, b) => new Date(b.frontMatter.date).getTime()
@@ -44,9 +47,10 @@ export default function readMarkdown() {
   };
 
   const readContent = (slug: string) => {
-    if (fs.existsSync(`${process.env.MD_PATH}/${slug}.${process.env.MD_EXT}`)) {
+    const parsedSlug = slug.replaceAll('-', ' ');
+    if (fs.existsSync(`${process.env.MD_PATH}/${parsedSlug}.${process.env.MD_EXT}`)) {
       const file = fs.readFileSync(
-        `${process.env.MD_PATH}/${slug}.${process.env.MD_EXT}`,
+        `${process.env.MD_PATH}/${parsedSlug}.${process.env.MD_EXT}`,
       );
       return matter(file).content;
     }
