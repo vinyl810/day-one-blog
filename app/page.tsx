@@ -35,28 +35,27 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
   };
 };
 
-const readFrontMatter = () => {
-  const files = fs.readdirSync(contentsPath);
-  const parsedFiles = files.map((fileName) => {
-    const file = fs.readFileSync(path.join(contentsPath, fileName));
-    const { data } = matter(file);
-    /* unsafe assertion for metaData */
-    const frontMatter = fillEmptyMatter(data as FrontMatter);
-    return {
-      slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
-      frontMatter,
-    };
-  });
-  console.log('parsedFiles', parsedFiles);
-  return parsedFiles?.toSorted?.(
-    (a, b) => new Date(b.frontMatter.date).getTime()
-      - new Date(a.frontMatter.date).getTime(),
-  );
-};
-
 const libreBarcode = LibreBarcode({ subsets: ['latin'], weight: ['400'] });
 
 export default async function Home() {
+  const readFrontMatter = () => {
+    const files = fs.readdirSync(contentsPath);
+    const parsedFiles = files.map((fileName) => {
+      const file = fs.readFileSync(path.join(contentsPath, fileName));
+      const { data } = matter(file);
+      /* unsafe assertion for metaData */
+      const frontMatter = fillEmptyMatter(data as FrontMatter);
+      return {
+        slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
+        frontMatter,
+      };
+    });
+    console.log('parsedFiles', parsedFiles);
+    return parsedFiles?.toSorted?.(
+      (a, b) => new Date(b.frontMatter.date).getTime()
+        - new Date(a.frontMatter.date).getTime(),
+    );
+  };
   const frontMatter = readFrontMatter();
   console.log('frontMatter', frontMatter, readFrontMatter);
 
