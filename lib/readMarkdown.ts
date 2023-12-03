@@ -31,6 +31,7 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
 };
 
 export default function readMarkdown() {
+  console.log(contentsPath);
   const readFrontMatter = () => {
     const files = fs.readdirSync(contentsPath);
     const parsedFiles = files.map((fileName) => {
