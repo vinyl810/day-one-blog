@@ -9,7 +9,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: var(--padding-md);
+  gap: 1rem;
 }
 
 .intro-logo {
@@ -24,15 +24,18 @@
   gap: 1rem;
 }
 
-.about {
+.menu-item {
   box-sizing: border-box;
   padding: 0.25rem;
   border-radius: 2px;
-  border-bottom: 2px solid lightgray;
+  border-bottom: 2px solid var(--color-border1);
+  color: var(--color-text1);
+  text-decoration: none;
+  user-select: none;
 }
 
-.about:hover {
-  border-bottom: 2px solid #9fb9bf;
+.menu-item:hover {
+  border-bottom: 2px solid var(--color-border2);
 }
 
 .posts {
@@ -41,15 +44,8 @@
   box-sizing: border-box;
   flex-wrap: wrap;
   padding-top: 1rem;
-  border-top: 2px solid lightgray;
+  border-top: 2px solid var(--color-border1);
   margin: -1rem;
-}
-
-.posts-header {
-  display: flex;
-  height: var(--padding-lg);
-  align-items: center;
-  justify-content: space-between;
 }
 
 .post-item {
@@ -58,11 +54,11 @@
   width: calc(25% - 2rem);
   height: 25rem;
   box-sizing: border-box;
-  padding: var(--padding-md);
-  border: 1px solid lightgray;
+  padding: 1rem;
+  border: 1px solid var(--color-border1);
   border-radius: 2px;
   margin: 1rem;
-  background: ghostwhite;
+  background: var(--color-background1);
   color: #333;
   gap: 10px;
   grid-template-columns: 100%;
@@ -72,7 +68,7 @@
 }
 
 .post-item:hover {
-  border: 1px solid #9fb9bf;
+  border: 1px solid var(--color-border2);
   transform: translateY(-8px);
   transition: transform .25s ease-in;
 }
@@ -108,7 +104,6 @@
     width: calc(33.3% - 2rem);
   }
 }
-
 
 @media (width <= 1056px) {
   .post-item {

@@ -17,12 +17,10 @@ export default async function Home() {
           DAY ONE AT WORK
         </span>
         <div className={style.menu}>
-          <div className={style.about}>all posts</div>
-          <div className={style.about}>about me</div>
-          <div className={style.about}>categories</div>
+          <Link href="/" className={style['menu-item']}>all posts</Link>
+          <Link href="/" className={style['menu-item']}>about me</Link>
         </div>
       </div>
-      {/* <div className={style['posts-header']}>recent posts</div> */}
       <div className={style.posts}>
         {frontMatter?.map?.((file) => (
           <Link

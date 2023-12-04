@@ -22,12 +22,12 @@ export default function FloatingHeader() {
   });
 
   return (
-    <div className={`${style.header}`} style={{ marginTop: height }}>
+    <div className={`${style.floating} ${style.header}`} style={{ marginTop: height }}>
       <Link
         href="/"
         className={`${libreBarcode.className} ${style['header-logo']}`}
       >
-        DAY ONE AT WORK
+        <Image src="/dayone-logo.png" alt="logo" height="40" width="40" />
       </Link>
       <Image src="/github-mark.png" alt="github-logo" height="25" width="25" />
     </div>
