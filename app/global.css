@@ -1,8 +1,11 @@
 * {
-  --padding-md: 15px;
-  --header-height: 65px;
-  --padding-sm: 10px;
-  --padding-lg: 30px;
+  --color-primary: lightsteelblue;
+  --color-border1: lightgray;
+  --color-border2: #9fb9bf;
+  --color-text1: #010101;
+  --color-text2: #498ba2;
+  --color-background1: ghostwhite;
+  --color-background2: #dce2ea;
   
   margin: 0;
 }
@@ -10,6 +13,6 @@
 html, body {
   max-width: 100%;
   min-height: 100vh;
-  background: ghostwhite;
+  background: var(--color-background1);
   font-size: 1rem;
 }

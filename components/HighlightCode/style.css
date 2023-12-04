@@ -50,14 +50,20 @@ pre {
   }
 }
 
+code {
+  padding: 0.2em;
+  border-radius: 0.2em;
+  background: var(--color-background2);
+  color: var(--color-text2);
+}
+
 blockquote {
   padding: 1rem 1rem 1rem 2rem;
-  border-left: 4px solid steelblue;
+  border-left: 4px solid var(--color-primary);
   margin: 2rem 0;
-  background: #dce2ea;
+  background: var(--color-background2);
   border-bottom-right-radius: 4px;
   border-top-right-radius: 4px;
-  color: var(--text1);
 
   :first-child {
     margin-top: 0;
