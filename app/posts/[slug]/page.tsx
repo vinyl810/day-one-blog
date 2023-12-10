@@ -1,7 +1,7 @@
 import React from 'react';
 import readMarkdown from '@/lib/readMarkdown';
-import NotFound from '@/components/NotFound';
-import HighlightCode from '@/components/HighlightCode';
+import NotFound from '@/components/server/NotFound';
+import HighlightCode from '@/components/client/HighlightCode';
 import Markdown from 'react-markdown';
 import style from './style.module.css';
 
