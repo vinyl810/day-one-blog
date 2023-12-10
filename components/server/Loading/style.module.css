@@ -1,4 +1,4 @@
-.not-found {
+.loading {
   display: flex;
   width: 100%;
   height: calc(100vh - 100px);
@@ -6,7 +6,7 @@
   justify-content: center;
 }
 
-.not-found-text {
+.loading-text {
   margin: 0;  
   animation: shine 1s linear infinite;
   background: linear-gradient(
