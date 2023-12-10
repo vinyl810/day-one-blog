@@ -29,7 +29,9 @@ export default function FloatingHeader() {
       >
         <Image src="/dayone-logo.png" alt="logo" height="40" width="40" />
       </Link>
-      <Image src="/github-mark.png" alt="github-logo" height="25" width="25" />
+      <Link href={process.env.GITHUB_LINK ?? ''}>
+        <Image src="/github-mark.png" alt="github-logo" height="25" width="25" />
+      </Link>
     </div>
   );
 }
