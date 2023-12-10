@@ -30,6 +30,13 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
   };
 };
 
+export const readAboutMarkdown = () => {
+  const about = path.join(process.cwd(), 'contents', 'about', 'about.md');
+  const file = fs.readFileSync(about);
+  const { content } = matter(file);
+  return content;
+};
+
 export default function readMarkdown() {
   const readFrontMatter = () => {
     const files = fs.readdirSync(contentsPath);

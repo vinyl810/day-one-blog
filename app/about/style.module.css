@@ -1,0 +1,28 @@
+.markdown-wrapper img {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  margin: auto;
+}
+
+.links-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.links-wrapper img {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+}
+
+.link:hover {
+  border: 1px solid var(--color-border2);
+}
+
+.markdown-wrapper * {
+  margin-right: 1rem;
+  margin-left: 1rem;
+  text-align: center;
+}
