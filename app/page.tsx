@@ -18,7 +18,7 @@ export default async function Home() {
         </span>
         <div className={style.menu}>
           <Link href="/" className={style['menu-item']}>all posts</Link>
-          <Link href="/" className={style['menu-item']}>about me</Link>
+          <Link href="/about" className={style['menu-item']}>about me</Link>
         </div>
       </div>
       <div className={style.posts}>
