@@ -7,18 +7,19 @@ export default function windowScrollControl(threshold = 70) {
 
   const onScrollY = (height: number, heightSetterFunction: HeightSetterFunction) => {
     const deltaY = window.scrollY - previousScrollY;
+    const smoothHeight = height - deltaY;
     if (window.scrollY <= headerThreshold) {
       heightSetterFunction(-headerThreshold);
       return;
     }
     if (deltaY < 0) {
       if (height < 0) {
-        heightSetterFunction(height - deltaY);
+        if (smoothHeight <= 0) heightSetterFunction(smoothHeight);
       } else {
         heightSetterFunction(0);
       }
     } else if (height > -headerThreshold && height <= 0) {
-      heightSetterFunction(height - deltaY);
+      if (smoothHeight <= 0) heightSetterFunction(smoothHeight);
     } else {
       heightSetterFunction(-headerThreshold);
     }
