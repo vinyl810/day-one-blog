@@ -1,5 +1,16 @@
 .markdown-wrapper {
+  position: relative;
   padding: 0 1rem;
+}
+
+.cover-image {
+  position: relative;
+  width: 100%;
+  min-height: 10rem;
+}
+
+.cover-image img {
+  object-fit: cover;
 }
 
 @media (width >= 768px) {

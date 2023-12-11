@@ -63,7 +63,9 @@ export default function readMarkdown() {
     const parsedPath = path.join(contentsPath, `${parsedSlug}.${process.env.MD_EXT}`);
     if (fs.existsSync(parsedPath)) {
       const file = fs.readFileSync(parsedPath);
-      return matter(file).content;
+      const { data, content } = matter(file);
+      /* unsafe assertion for metaData */
+      return { data: fillEmptyMatter(<FrontMatter>data), content };
     }
     return null;
   };
