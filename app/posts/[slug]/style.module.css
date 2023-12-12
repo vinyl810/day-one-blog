@@ -1,10 +1,28 @@
 .markdown-wrapper {
+  position: relative;
   padding: 0 1rem;
+}
+
+.cover-image {
+  position: relative;
+  width: 100%;
+  min-height: 10rem;
+}
+
+.cover-image img {
+  position: relative !important;
+  height: auto !important;
+  max-height: 50vw;
+  object-fit: contain;
 }
 
 @media (width >= 768px) {
   .markdown-wrapper {
     width: 768px;
     margin: auto;
+  }
+
+  .cover-image img {
+    max-height: 30vw;
   }
 }
