@@ -10,12 +10,19 @@
 }
 
 .cover-image img {
-  object-fit: cover;
+  position: relative !important;
+  height: auto !important;
+  max-height: 50vw;
+  object-fit: contain;
 }
 
 @media (width >= 768px) {
   .markdown-wrapper {
     width: 768px;
     margin: auto;
+  }
+
+  .cover-image img {
+    max-height: 30vw;
   }
 }
