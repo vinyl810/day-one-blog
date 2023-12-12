@@ -9,24 +9,33 @@ import style from './style.module.css';
 const { readContent } = readMarkdown();
 
 export default function Page({ params }: { params: { slug: string } }) {
-  const { data, content } = readContent(params.slug) ?? { data: null, content: '' };
-  console.log(data?.title);
+  const { 
+    data: {title, category, coverImage, date},
+    content
+  } = readContent(params.slug) ?? { data: {}, content: '' };
+  console.log(title);
 
   return content
     ? (
       <div className={style['markdown-wrapper']}>
-        <h1>{data?.title}</h1>
+        <h1>{title ?? ''}</h1>
+        <div className={style.date}>{(new Date(date ?? ''))?.toLocaleDateString()}</div>
+        <div className={style['category-wrapper']}>
+          {category?.map((cat, i) => (
+            <div className={style.category} key={i}>{cat}</div>
+          ))}
+        </div>
         <div
           className={style['cover-image']}
         >
           <Image
-            src={data?.coverImage ?? ''}
+            src={coverImage ?? ''}
             fill
             alt="coverImage"
           />
         </div>
         <Markdown>
-          {content}
+          {content ?? ''}
         </Markdown>
         <HighlightCode />
       </div>

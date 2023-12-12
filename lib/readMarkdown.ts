@@ -7,7 +7,7 @@ interface FrontMatter {
   excerpt: string
   coverImage: string
   date: string
-  category: string
+  category: Array<string>
 }
 
 const contentsPath = path.join(process.cwd(), 'contents', 'posts');
@@ -17,8 +17,8 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
     title = 'No Title',
     excerpt = 'No Excerpt',
     coverImage = 'https://picsum.photos/200/300',
-    date = new Date(Date.now()),
-    category = 'No Category',
+    date = new Date(Date.now()).toUTCString(),
+    category = [],
   } = frontMatter;
 
   return {
