@@ -37,8 +37,32 @@ export const readAboutContent = () => {
   return content;
 };
 
+export const readAllCategories = () => {
+  const files = fs.readdirSync(contentsPath);
+
+  const categories = files.reduce((acc: {[index: string]: number}, fileName) => {
+    const file = fs.readFileSync(path.join(contentsPath, fileName));
+    const { data } = matter(file);
+    /* unsafe assertion for metaData */
+    const { category } = fillEmptyMatter(<FrontMatter>data);
+    const result = category.reduce((innerAcc, cur) => {
+      const res = innerAcc;
+      if (!res[cur]) {
+        res[cur] = 1;
+      } else {
+        res[cur] += 1;
+      }
+      return res;
+    }, acc);
+    return result;
+  }, {});
+
+  return categories;
+};
+
 export const readFrontMatterByCategory = (category?: string) => {
   const files = fs.readdirSync(contentsPath);
+
   const parsedFiles = files.map((fileName) => {
     const file = fs.readFileSync(path.join(contentsPath, fileName));
     const { data } = matter(file);
