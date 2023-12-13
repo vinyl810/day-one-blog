@@ -3,6 +3,33 @@
   padding: 0 1rem;
 }
 
+.date {
+  margin-top: -2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text1);
+  font-size: 0.9rem;
+}
+
+.category-wrapper {
+  display: flex;
+  margin: -0.5rem;
+  margin-bottom: 1rem;
+}
+
+.category {
+  display: flex;
+  height: 100%;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 10%;
+  margin: 0.5rem;
+  background: #cee8f2;
+  color: var(--color-text1);
+  font-size: 0.9rem;
+}
+
 .cover-image {
   position: relative;
   width: 100%;

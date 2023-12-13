@@ -7,7 +7,7 @@ interface FrontMatter {
   excerpt: string
   coverImage: string
   date: string
-  category: string
+  category: Array<string>
 }
 
 const contentsPath = path.join(process.cwd(), 'contents', 'posts');
@@ -17,8 +17,8 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
     title = 'No Title',
     excerpt = 'No Excerpt',
     coverImage = 'https://picsum.photos/200/300',
-    date = new Date(Date.now()),
-    category = 'No Category',
+    date = new Date(Date.now()).toUTCString(),
+    category = [],
   } = frontMatter;
 
   return {
@@ -30,48 +30,66 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
   };
 };
 
-export const readAboutMarkdown = () => {
+export const readAboutContent = () => {
   const about = path.join(process.cwd(), 'contents', 'about', 'about.md');
   const file = fs.readFileSync(about);
   const { content } = matter(file);
   return content;
 };
 
-export default function readMarkdown() {
-  const readFrontMatter = () => {
-    const files = fs.readdirSync(contentsPath);
-    const parsedFiles = files.map((fileName) => {
-      const file = fs.readFileSync(path.join(contentsPath, fileName));
-      const { data } = matter(file);
-      /* unsafe assertion for metaData */
-      const frontMatter = fillEmptyMatter(<FrontMatter>data);
-      return {
-        slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
-        frontMatter,
-      };
-    });
-    parsedFiles?.sort?.(
-      (a, b) => (new Date(b.frontMatter.date)).getTime()
-        - (new Date(a.frontMatter.date)).getTime(),
-    );
+export const readAllCategories = () => {
+  const files = fs.readdirSync(contentsPath);
 
-    return parsedFiles;
-  };
+  const categories = files.reduce((acc: {[index: string]: number}, fileName) => {
+    const file = fs.readFileSync(path.join(contentsPath, fileName));
+    const { data } = matter(file);
+    /* unsafe assertion for metaData */
+    const { category } = fillEmptyMatter(<FrontMatter>data);
+    const result = category.reduce((innerAcc, cur) => {
+      const res = innerAcc;
+      res[cur] = 1 + (res[cur] ?? 0);
+      return res;
+    }, acc);
+    return result;
+  }, {});
 
-  const readContent = (slug: string) => {
-    const parsedSlug = slug.replaceAll('-', ' ');
-    const parsedPath = path.join(contentsPath, `${parsedSlug}.${process.env.MD_EXT}`);
-    if (fs.existsSync(parsedPath)) {
-      const file = fs.readFileSync(parsedPath);
-      const { data, content } = matter(file);
-      /* unsafe assertion for metaData */
-      return { data: fillEmptyMatter(<FrontMatter>data), content };
-    }
-    return null;
-  };
+  return categories;
+};
 
-  return {
-    readFrontMatter,
-    readContent,
-  };
-}
+export const readFrontMatterByCategory = (category?: string) => {
+  const files = fs.readdirSync(contentsPath);
+
+  const parsedFiles = files.map((fileName) => {
+    const file = fs.readFileSync(path.join(contentsPath, fileName));
+    const { data } = matter(file);
+    /* unsafe assertion for metaData */
+    const frontMatter = fillEmptyMatter(<FrontMatter>data);
+    return {
+      slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
+      frontMatter,
+    };
+  });
+
+  parsedFiles?.sort?.(
+    (a, b) => (new Date(b.frontMatter.date)).getTime()
+      - (new Date(a.frontMatter.date)).getTime(),
+  );
+
+  const categoryFilteredFiles = category && category.length
+    ? parsedFiles.filter((x) => x.frontMatter.category.includes(category))
+    : parsedFiles;
+
+  return categoryFilteredFiles;
+};
+
+export const readMarkdownContent = (slug: string) => {
+  const parsedSlug = slug.replaceAll('-', ' ');
+  const parsedPath = path.join(contentsPath, `${parsedSlug}.${process.env.MD_EXT}`);
+  if (fs.existsSync(parsedPath)) {
+    const file = fs.readFileSync(parsedPath);
+    const { data, content } = matter(file);
+    /* unsafe assertion for metaData */
+    return { data: fillEmptyMatter(<FrontMatter>data), content };
+  }
+  return null;
+};

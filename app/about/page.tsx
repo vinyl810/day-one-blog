@@ -1,14 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { readAboutMarkdown } from '@/lib/readMarkdown';
+import { readAboutContent } from '@/lib/readMarkdown';
 import NotFound from '@/components/server/NotFound';
 import Markdown from 'react-markdown';
 import style from './style.module.css';
 import '@/components/client/HighlightCode/style.css';
 
 export default function Page() {
-  const content = readAboutMarkdown();
+  const content = readAboutContent();
   return content
     ? (
       <div className={style['markdown-wrapper']}>
