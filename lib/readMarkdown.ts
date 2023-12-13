@@ -47,11 +47,7 @@ export const readAllCategories = () => {
     const { category } = fillEmptyMatter(<FrontMatter>data);
     const result = category.reduce((innerAcc, cur) => {
       const res = innerAcc;
-      if (!res[cur]) {
-        res[cur] = 1;
-      } else {
-        res[cur] += 1;
-      }
+      res[cur] = 1 + (res[cur] ?? 0);
       return res;
     }, acc);
     return result;
