@@ -30,48 +30,46 @@ const fillEmptyMatter = (frontMatter: FrontMatter) => {
   };
 };
 
-export const readAboutMarkdown = () => {
+export const readAboutContent = () => {
   const about = path.join(process.cwd(), 'contents', 'about', 'about.md');
   const file = fs.readFileSync(about);
   const { content } = matter(file);
   return content;
 };
 
-export default function readMarkdown() {
-  const readFrontMatter = () => {
-    const files = fs.readdirSync(contentsPath);
-    const parsedFiles = files.map((fileName) => {
-      const file = fs.readFileSync(path.join(contentsPath, fileName));
-      const { data } = matter(file);
-      /* unsafe assertion for metaData */
-      const frontMatter = fillEmptyMatter(<FrontMatter>data);
-      return {
-        slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
-        frontMatter,
-      };
-    });
-    parsedFiles?.sort?.(
-      (a, b) => (new Date(b.frontMatter.date)).getTime()
-        - (new Date(a.frontMatter.date)).getTime(),
-    );
+export const readFrontMatterByCategory = (category?: string) => {
+  const files = fs.readdirSync(contentsPath);
+  const parsedFiles = files.map((fileName) => {
+    const file = fs.readFileSync(path.join(contentsPath, fileName));
+    const { data } = matter(file);
+    /* unsafe assertion for metaData */
+    const frontMatter = fillEmptyMatter(<FrontMatter>data);
+    return {
+      slug: fileName.replaceAll(`.${process.env.MD_EXT}`, '').replaceAll(' ', '-'),
+      frontMatter,
+    };
+  });
 
-    return parsedFiles;
-  };
+  parsedFiles?.sort?.(
+    (a, b) => (new Date(b.frontMatter.date)).getTime()
+      - (new Date(a.frontMatter.date)).getTime(),
+  );
 
-  const readContent = (slug: string) => {
-    const parsedSlug = slug.replaceAll('-', ' ');
-    const parsedPath = path.join(contentsPath, `${parsedSlug}.${process.env.MD_EXT}`);
-    if (fs.existsSync(parsedPath)) {
-      const file = fs.readFileSync(parsedPath);
-      const { data, content } = matter(file);
-      /* unsafe assertion for metaData */
-      return { data: fillEmptyMatter(<FrontMatter>data), content };
-    }
-    return null;
-  };
+  const categoryFilteredFiles = category && category.length
+    ? parsedFiles.filter((x) => x.frontMatter.category.includes(category))
+    : parsedFiles;
 
-  return {
-    readFrontMatter,
-    readContent,
-  };
-}
+  return categoryFilteredFiles;
+};
+
+export const readMarkdownContent = (slug: string) => {
+  const parsedSlug = slug.replaceAll('-', ' ');
+  const parsedPath = path.join(contentsPath, `${parsedSlug}.${process.env.MD_EXT}`);
+  if (fs.existsSync(parsedPath)) {
+    const file = fs.readFileSync(parsedPath);
+    const { data, content } = matter(file);
+    /* unsafe assertion for metaData */
+    return { data: fillEmptyMatter(<FrontMatter>data), content };
+  }
+  return null;
+};
