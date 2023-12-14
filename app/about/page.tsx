@@ -5,7 +5,7 @@ import { readAboutContent } from '@/lib/readMarkdown';
 import NotFound from '@/components/server/NotFound';
 import Markdown from 'react-markdown';
 import style from './style.module.css';
-import '@/components/client/HighlightCode/style.css';
+import '@/style/codeHighlight.css';
 
 export default function Page() {
   const content = readAboutContent();
