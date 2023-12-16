@@ -1,6 +1,14 @@
 { 
   "extends": ["stylelint-config-idiomatic-order", "stylelint-config-standard"],
   "plugins": ["stylelint-order"],
+  "overrides": [
+    {
+      "files": [
+        "**/*.tsx"
+      ],
+      "customSyntax": "@stylelint/postcss-css-in-js"
+    }
+  ],
   "rules": {
     "declaration-block-trailing-semicolon": "always",
     "order/order": [

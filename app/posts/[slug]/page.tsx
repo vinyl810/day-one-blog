@@ -13,7 +13,6 @@ export default function Page({ params }: { params: { slug: string } }) {
     },
     content,
   } = readMarkdownContent(params.slug) ?? { data: {}, content: '' };
-  console.log(title);
 
   return content
     ? (
@@ -38,6 +37,21 @@ export default function Page({ params }: { params: { slug: string } }) {
           {content ?? ''}
         </Markdown>
         <HighlightCode />
+        <div className={style['related-title']}>related posts</div>
+        <div className={style.related}>
+          <div className={style['related-card']}>
+            <div className={style['related-card-title']}>title</div>
+            <div className={style['related-card-exercpt']}>exercpt</div>
+          </div>
+          <div className={style['related-card']}>
+            <div className={style['related-card-title']}>title</div>
+            <div className={style['related-card-exercpt']}>exercpt</div>
+          </div>
+          <div className={style['related-card']}>
+            <div className={style['related-card-title']}>title</div>
+            <div className={style['related-card-exercpt']}>exercpt</div>
+          </div>
+        </div>
       </div>
     )
     : <NotFound />;
