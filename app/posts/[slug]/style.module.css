@@ -53,10 +53,16 @@
 }
 
 .related-card {
-  width: calc(33% - 2rem);
+  width: calc(50% - 2rem);
   border: 1px solid var(--color-border1);
   border-radius: 5px;
   margin: 1rem;
+  color: var(--color-text1);
+  text-decoration: none;
+}
+
+.related-card:nth-of-type(3) {
+  display: none;
 }
 
 .related-card-title {
@@ -82,5 +88,13 @@
 
   .cover-image img {
     max-height: 30vw;
+  }
+
+  .related-card {
+    width: calc(33% - 2rem);
+  }
+
+  .related-card:nth-of-type(3) {
+    display: block;
   }
 }

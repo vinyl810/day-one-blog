@@ -1,6 +1,7 @@
 import React from 'react';
+import Link from 'next/link';
 import Image from 'next/image';
-import { readMarkdownContent } from '@/lib/readMarkdown';
+import { readFrontMatterByCategory, readMarkdownContent } from '@/lib/readMarkdown';
 import NotFound from '@/components/server/NotFound';
 import HighlightCode from '@/components/client/HighlightCode';
 import Markdown from 'react-markdown';
@@ -13,6 +14,10 @@ export default function Page({ params }: { params: { slug: string } }) {
     },
     content,
   } = readMarkdownContent(params.slug) ?? { data: {}, content: '' };
+
+  const relatedPosts = readFrontMatterByCategory(category?.[0])
+    .slice(0, 3)
+    .filter((x) => x.slug !== params.slug);
 
   return content
     ? (
@@ -39,18 +44,16 @@ export default function Page({ params }: { params: { slug: string } }) {
         <HighlightCode />
         <div className={style['related-title']}>related posts</div>
         <div className={style.related}>
-          <div className={style['related-card']}>
-            <div className={style['related-card-title']}>title</div>
-            <div className={style['related-card-exercpt']}>exercpt</div>
-          </div>
-          <div className={style['related-card']}>
-            <div className={style['related-card-title']}>title</div>
-            <div className={style['related-card-exercpt']}>exercpt</div>
-          </div>
-          <div className={style['related-card']}>
-            <div className={style['related-card-title']}>title</div>
-            <div className={style['related-card-exercpt']}>exercpt</div>
-          </div>
+          {relatedPosts.map((x) => (
+            <Link href={x.slug} className={style['related-card']}>
+              <div className={style['related-card-title']}>
+                {x.frontMatter.title}
+              </div>
+              <div className={style['related-card-exercpt']}>
+                {x.frontMatter.excerpt}
+              </div>
+            </Link>
+          ))}
         </div>
       </div>
     )
